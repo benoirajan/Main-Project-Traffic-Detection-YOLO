@@ -1,0 +1,10 @@
+# @title Train from custom weight batch=47 epoch=30
+imgSize = 700 #@param {type:"number"}
+batch = 30 #@param {type:"number"}
+epochs = 30 #@param {type:"number"}
+data = "/content/drive/MyDrive/Colab-Notebooks/TrafficDetection/dataset/data.yaml" #@param {type:"string"}
+cfg = "/content/drive/MyDrive/Colab-Notebooks/TrafficDetection/yolov5/models/yolov5s.yaml" #@param {type:"string"}
+weights = "/content/drive/MyDrive/Colab-Notebooks/TrafficDetection/yolov5/runs/train/exp5/weights/best.pt" #@param {type: "string"}
+
+
+python '/content/drive/MyDrive/Colab-Notebooks/TrafficDetection/yolov5/train.py' --img $imgSize --batch $batch --epochs $epochs --data $data --weights $weights --cfg $cfg
