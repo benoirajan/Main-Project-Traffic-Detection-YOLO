@@ -1,48 +1,54 @@
 import cv2
 from numpy import double
 
-file = 'Asraf_06_jpg.rf.29370f9b72bb41d84fd7205a8db6ea54.jpg'
-
-img = './tiv ds/images/1920_1080/'+file
-lbl = './tiv ds/labels/1920_1080n/'+('.'.join(file.split('.')[:-1])+'.txt')
-
-
-image = cv2.imread(img)
-
+'''
+@param file: source
+'''
+def drawBboxAndsave(file,savedir,show=True):
+    img = './tiv ds/images/1920_1080/'+file
+    lbl = './tiv ds/labels/1920_1080/'+('.'.join(file.split('.')[:-1])+'.txt')
 
 
-height, width, channels = image.shape
-start_point = (0,0)
-end_point = (width, height)
-color = (255,255,255)
-thickness = 1
+    image = cv2.imread(img)
 
-#load txt file
-label = open(lbl,'r')
-line = label.readline() 
-while line != '':
-    sp = line.split()
+    height, width, channels = image.shape
+    start_point = (0,0)
+    end_point = (width, height)
+    color = (255,255,0)
+    thickness = 1
 
-    # class, x_center, y_center, width, height.
-    x  = width*float(sp[1])
-    y = height*float(sp[2])
-    w = float(sp[3])*width
-    h = float(sp[4])*height
+    #load txt file
+    label = open(lbl,'r')
+    line = label.readline() 
+    while line != '':
+        sp = line.split()
 
-    p1 = (int(x-w/2), int(y-h/2))
-    p2 = (int(p1[0]+w), int(p1[1]+h))
+        # class, x_center, y_center, width, height.
+        x  = width*float(sp[1])
+        y = height*float(sp[2])
+        w = float(sp[3])*width
+        h = float(sp[4])*height
 
-    # print(p1,p2,sp[0])
+        p1 = (int(x-w/2), int(y-h/2))
+        p2 = (int(p1[0]+w), int(p1[1]+h))
 
-    image = cv2.rectangle(image,p1,p2,color,thickness)
-    image = cv2.putText(image,sp[0],(int(x),int(y)),cv2.FONT_HERSHEY_COMPLEX,0.3,color=color)
+        # print(p1,p2,sp[0])
 
-    line = label.readline()
+        image = cv2.rectangle(image,p1,p2,color,thickness)
+        image = cv2.putText(image,sp[0],(int(x),int(y)),cv2.FONT_HERSHEY_COMPLEX,0.3,color=color)
 
-label.close()
+        line = label.readline()
 
-# import os
-# os.mkdir('./bbox/')
-cv2.imshow('image',image)
-cv2.waitKey(0)
-cv2.imwrite('./bbox/'+file,image)
+    label.close()
+
+    # import os
+    # os.mkdir('./bbox/')
+    if show:
+        cv2.imshow('image',image)
+        cv2.waitKey(0)
+    cv2.imwrite(savedir+file,image)
+    print('File saved to',savedir+file)
+
+file = 'Asraf_01_jpg.rf.b698f86713f1b28c16ecab5f4ef89edb.jpg'
+
+drawBboxAndsave(file,'./bbox/')
