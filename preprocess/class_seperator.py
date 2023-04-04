@@ -1,11 +1,5 @@
-import shutil
-from PIL import Image
-import pandas as pd
 import os
 import cv2
-from numpy import double
-
-from traitlets import Instance
 
 def drawBboxAndsave(file,savedir,show=True):
     img = './tiv ds/images/1920_1080/'+file
@@ -15,8 +9,6 @@ def drawBboxAndsave(file,savedir,show=True):
     image = cv2.imread(img)
 
     height, width, channels = image.shape
-    start_point = (0,0)
-    end_point = (width, height)
     color = (0,255,0)
     thickness = 1
 
@@ -37,7 +29,9 @@ def drawBboxAndsave(file,savedir,show=True):
 
         # print(p1,p2,sp[0])
 
-        # image = cv2.rectangle(image,p1,p2,color,thickness)
+        #rectangle
+        image = cv2.rectangle(image,p1,p2,color,thickness)
+        # Text
         image = cv2.putText(image,sp[0],(int(x),int(y)),cv2.FONT_HERSHEY_COMPLEX,0.3,color=color)
 
         line = label.readline()

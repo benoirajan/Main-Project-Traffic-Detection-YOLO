@@ -1,9 +1,4 @@
-import shutil
-from PIL import Image
-import pandas as pd
 import os
-
-from traitlets import Instance
 
 file = 'val/'
 imgdir = "./tiv ds/labels/"+file
@@ -25,6 +20,8 @@ for dir in dirs:
         else:
             labdic[sp[0]] = 1
 
+
+        #class value to 0
         sp[0]='0'
         lineList.append(' '.join(sp))
         line = label.readline()
