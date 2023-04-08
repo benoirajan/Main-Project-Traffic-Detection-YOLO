@@ -11,3 +11,15 @@ python '/content/drive/MyDrive/Colab-Notebooks/TrafficDetection/yolov5/train.py'
 
 # testing
 python './main/yolov5/detect.py' --img 1280  --source 'https://cdn.dnaindia.com/sites/default/files/styles/full/public/2016/07/14/481934-heavy-vehicles.jpg' --weights './main/weights/singleclass.pt'  --project './main/output' --line-thickness 1 --visualize --hide-labels
+
+
+
+
+imgSize = -1 #@param {type:"number"}
+source = "'/content/drive/MyDrive/Video /4K Road traffic video for object detection and tracking - free download now!.mp4'" #@param {type:"string"}
+weights = "/content/drive/MyDrive/Colab-Notebooks/TrafficDetection/yolov5/runs/train/css5/weights/best.pt" #@param {type: "string"}
+output = '/content/drive/MyDrive/Colab-Notebooks/TrafficDetection/output/' #@param{type:"string"}
+line_thickness = 2 #@param{type:"number"}
+codes = '#--visualize' #@param{type:"string"}
+
+!python '/content/drive/MyDrive/Colab-Notebooks/TrafficDetection/yolov5/detect.py' --source $source --weights $weights --project $output --line-thickness $line_thickness $codes

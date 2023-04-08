@@ -3,11 +3,12 @@ from PIL import Image
 import os
 
 
-imgdir = "vit ds/images/val/"
-savedir = "vit ds/resize_val/"
+imgdir = "./Vehicles/"
+savedir = "./VehicleR/"
 dirs = os.listdir(imgdir)
 
-os.mkdir(savedir)
+if not os.path.exists(savedir):
+    os.mkdir(savedir)
 ims = []
 
 for dir in dirs:
