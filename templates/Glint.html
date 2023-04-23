@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TDDL</title>
+
+    <style>
+        * {
+            font-family: arial, sans-serif;
+        }
+        body{
+            background-image: url(/static/images/cars.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .block{
+            display: flex;
+            flex-flow: column;
+            color:black;
+            margin-top: 30px;
+            border-radius: 20px;
+            padding: 35px;
+            color: #a80707;
+            background: #fdfdfd
+        }
+    </style>
+
+
+
+    <script>
+
+        function benoi(f) {
+            console.log('worked')
+            if (/^image/.test(f.files[0].type)) { // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(f.files[0]); // read the local file
+                console.log('slkfjs')
+
+                reader.onloadend = function () { // set image data as background of div
+                    //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                    //uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(" + this.result + ")");
+                    document.getElementById("preview").src = reader.result;
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="main-layout">
+
+    <h1 style="color: white;">TDDL</h1>
+    <form method="POST" action="" enctype="multipart/form-data">
+        <div class="block">
+            <div>
+                <!-- <label for="">Select image</label> -->
+                <input onchange="benoi(this)" id='image_file' type="file" class="uploadFile img" value="Upload Photo" name="image_file" accept="image/*">
+            </div>
+            
+        </div><!-- container -->
+        <div class="block">
+            <div>
+                <img id="preview" style="border-radius: 10px;
+                max-width:40%;
+                margin: 10px;" src=""/>
+            </div>
+            <div>
+                <button style="padding-block: 10px;
+                padding-inline: 30px;
+                font-size: 20px;
+                border-radius: 10px;
+                color: black;
+                border: none;
+                background: #e8eaf6;"
+                 type="submit">Detect</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
