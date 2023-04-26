@@ -1,6 +1,6 @@
 set imgSize=-1
-set source=--source VehicleR
-set weights=--weights ./main/weights/singleclass.pt 
+set source=--source Vehicles
+set weights=--weights ./main/weights/presinglecls.pt 
 set output=--project ./output/
 set name=--name detect --save-txt --max-det 40
 set line_thickness=--line-thickness 2

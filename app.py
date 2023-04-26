@@ -36,14 +36,14 @@ def get_image():
 @app.route('/', methods=['POST'])
 def upload_files():
     uploaded_file = request.files['image_file']
-    maxdet = request.form.get('max_det')
-    confThresh = request.form.get('conf_thresh')
+    maxdet = int(request.form.get('max_det'))
+    confThresh = int(request.form.get('conf_thresh'))
+    maxtime = int(request.form.get('mtime'))
+    mintime = int(request.form.get('minTime'))
     filename = secure_filename(uploaded_file.filename)
     if filename == '':
         abort(400)
-        # file_ext = os.path.splitext(filename)[1]
-        # if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-        #     abort(400)
+    
     file = "./upload/"
     if not os.path.exists(file):
         os.mkdir(file)
@@ -52,13 +52,11 @@ def upload_files():
         uploaded_file.save(file)
 
     dir, sums = getPrediction(maxdet, confThresh, file)
-    time = Traffic.getGreenTime(sums)
-    # print(dir)
-    # return redirect(url_for('index.htm?dir={}&{}={}&{}={}&{}={}&'.format(
-    # dir,labels[0],sums[0],labels[1],sums[1],labels[2],sums[2])))
+    time = Traffic.getGreenTime(sums, maxtime, maxdet)
+    
     outfile = str(dir) + filename
     if sums > 0:
-        time = 10 if time < 10 else time
+        time = mintime if time < mintime else time
     else:
         time = 0
     return render_template("result.html",
@@ -73,11 +71,11 @@ def getPrediction(maxdet, confThresh, image):
     print("(w,h): ", w, h)
     out = './output/'
     m = int(max(w, h))
-    lt = int(m/640)
+    lt = int(m/320)
     # print(maxdet,type(maxdet),confThresh,type(confThresh))
     # ncls=10
-    ncls = run(weights='./weights/pretrain5a.pt', source=image, imgsz=(w, h), view_img=False, line_thickness=lt,
-               project=out, max_det=int(maxdet), conf_thres=int(confThresh)/100, name='webd', exist_ok=True)
+    ncls = run(weights='./weights/presinglecls.pt', source=image, imgsz=(w, h), view_img=False, line_thickness=lt,
+               project=out, max_det=maxdet, conf_thres=confThresh/100, name='webd', exist_ok=True)
     return out+"webd/", ncls
 
 
