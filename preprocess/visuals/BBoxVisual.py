@@ -9,8 +9,8 @@ def drawBboxAndsave(file, savedir, show=True, color=(0, 255, 0), thickness=1, di
     @param file: source
     '''
     dir_name = dir_name+'/'
-    img = './singlecls ds/images/'+dir_name+file
-    lbl = './singlecls ds/labels/'+dir_name + \
+    img = './VehicleR/images/'+dir_name+file
+    lbl = './VehicleR/labels/'+dir_name + \
         ('.'.join(file.split('.')[:-1])+'.txt')
 
     image = cv2.imread(img)
@@ -51,9 +51,10 @@ def drawBboxAndsave(file, savedir, show=True, color=(0, 255, 0), thickness=1, di
 
 
 if (__name__ == '__main__'):
-    file = 'val/'
-    imgdir = "./singlecls ds/images/"+file
-    savedir = "./bbox val2/"
+    # file = 'val/'
+    file = ''
+    imgdir = "./VehicleR/images/"+file
+    savedir = "./bbox vehicleR/"
     if not os.path.exists(savedir):
         os.mkdir(savedir)
 

@@ -172,9 +172,11 @@ def run(
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
+                        
+                        # TODO
                         # annotator.box_label(xyxy, label, color=colors(c, True))
-                        annotator.box_label(xyxy, label, color=(255,240,240),txt_color=(0,0,0))
-                        #mycodes
+                        annotator.box_label(xyxy, "Vehicle", color=(255,240,240),txt_color=(0,0,0))
+                        
                         ncls += 1
 
                     if save_crop:

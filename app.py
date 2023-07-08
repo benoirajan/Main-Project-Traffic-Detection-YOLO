@@ -74,7 +74,7 @@ def getPrediction(maxdet, confThresh, image):
     lt = int(m/320)
     # print(maxdet,type(maxdet),confThresh,type(confThresh))
     # ncls=10
-    ncls = run(weights='./weights/presinglecls.pt', source=image, imgsz=(w, h), view_img=False, line_thickness=lt,
+    ncls = run(weights='./weights/custom.pt', source=image, imgsz=(w, h), view_img=False, line_thickness=lt,
                project=out, max_det=maxdet, conf_thres=confThresh/100, name='webd', exist_ok=True)
     return out+"webd/", ncls
 

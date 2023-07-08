@@ -1,8 +1,8 @@
 set imgSize=--img 640 
 set batch=--batch -1 
-set epochs=--epochs 3
-set data=--data ./singlecls_ds/vehicle.yaml
-set weights= 
+set epochs=--epochs 10
+set data=--data ./VehicleR/data.yaml
+@REM set weights= 
 @REM --weights ./main/yolov5/yolov5s.pt 
 set name=--name pretrained_5s 
 set code=--patience 30 --project ./main/train
